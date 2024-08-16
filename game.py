@@ -100,7 +100,7 @@ class SnakeGameAI:
         # 4. place new food or just move
         if self.head == self.food:
             self.score += 1
-            reward = 10
+            reward += 10
             self._place_food()
         else:
             self.snake.pop()
@@ -113,13 +113,12 @@ class SnakeGameAI:
 
 
     def is_collision(self, pt=None):
-        if pt is None:
+        if pt == None:
             pt = self.head
-        # hits boundary
-        #if pt.x > self.w - BLOCK_SIZE or pt.x < 0 or pt.y > self.h - BLOCK_SIZE or pt.y < 0:
-        #    return True
         
-        elif self.head.x > self.w - BLOCK_SIZE:
+        
+        
+        if self.head.x > self.w - BLOCK_SIZE:
             y = self.head.y 
             self.head = Point(0,y)
         elif self.head.x < 0 :
@@ -132,13 +131,12 @@ class SnakeGameAI:
             x = self.head.x 
             self.head = Point(x,self.h - BLOCK_SIZE)
         
-        # hits itself
-        elif pt in self.snake[1:]:
+        if self.head in self.snake[1:]:
             return True
-
-        return False
-
-
+        
+        else:
+            return False
+        
     def _update_ui(self):
         self.display.fill(BLACK)
 
