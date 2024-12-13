@@ -5,8 +5,8 @@ from collections import namedtuple
 
 
 pygame.init()
-font = pygame.font.Font('arial.ttf', 25)
-#font = pygame.font.SysFont('arial', 25)
+#font = pygame.font.Font('arial.ttf', 25)
+font = pygame.font.SysFont('arial', 25)
 
 class Direction(Enum):
     RIGHT = 1
@@ -97,17 +97,17 @@ class SnakeGame:
     def _is_collision(self):
         # hits boundary
         if self.head.x > self.w - BLOCK_SIZE:
-            y = self.head.y 
-            self.head = Point(0,y)
+            y = self.head.y
+            self.head = Point(-BLOCK_SIZE,y)
         elif self.head.x < 0 :
-            y = self.head.y 
-            self.head = Point(self.w - BLOCK_SIZE,y)
-        elif self.head.y > self.h - BLOCK_SIZE: 
+            y = self.head.y
+            self.head = Point(self.w,y)
+        elif self.head.y > self.h + BLOCK_SIZE: 
             x = self.head.x
-            self.head = Point(x,0)
+            self.head = Point(x,-BLOCK_SIZE)
         elif self.head.y < 0:
-            x = self.head.x 
-            self.head = Point(x,self.h - BLOCK_SIZE)
+            x = self.head.x
+            self.head = Point(x,self.h+BLOCK_SIZE)
         
         
         
